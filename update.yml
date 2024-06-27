@@ -1,5 +1,5 @@
 ---
-- hosts: vps
+- hosts: localhost
   become: true
   become_user: adm_ansible
   tasks:

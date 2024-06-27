@@ -1,5 +1,5 @@
 ---
-- hosts: 104.237.144.101
+- hosts: 10.0.2.1
   become: true
   become_user: adm_ansible
   tasks:

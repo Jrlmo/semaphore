@@ -1,6 +1,6 @@
 ---
 - name: Get hostname and IP address of Alpine hosts
-  hosts: 127.0.0.1
+  hosts: website
   gather_facts: yes
   tasks:
     - name: Display hostname and IP address

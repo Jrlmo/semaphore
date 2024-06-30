@@ -6,32 +6,95 @@
     - name: Display hostname and IP address
       debug:
         msg: "Hostname: {{ ansible_hostname }}, IP Address: {{ ansible_default_ipv4.address }}"
-
-    - name: dist-upgrade
+    - name: Check for available Linux updates
+      block:
+    - name: Update package manager cache (apt)
       ansible.builtin.apt:
-        upgrade: dist
-        update_cache: yes
-      register: upgrade_result
+        update_cache: true
+      when: ansible_pkg_mgr == "apt"
 
-    - name: Check if a reboot is required
-      ansible.builtin.stat:
-        path: /var/run/reboot-required
-        get_checksum: no
-      register: reboot_required_file
+    - name: Update package manager cache (dnf)
+      ansible.builtin.dnf:
+        refresh: true
+      when: ansible_pkg_mgr == "dnf"
 
-    - name: Reboot the server (if required).
-      ansible.builtin.reboot:
-      when: reboot_required_file.stat.exists
-      register: reboot_result
+    - name: Update package manager cache (yum)
+      ansible.builtin.yum:
+        name: "*"
+        state: latest
+        update_cache: true
+      when: ansible_pkg_mgr == "yum"
 
-    - name: Remove unneeded dependencies
+    - name: Update package manager cache (apk)
+      ansible.builtin.apk:
+        update_cache: true
+      when: ansible_pkg_mgr == "apk"
+
+    - name: Check for available updates
+      ansible.builtin.package_facts:
+        manager: auto
+      register: package_facts
+
+  tags:
+    - linux_update
+
+- name: Install Linux updates if available
+  block:
+    - name: Install updates using package manager (apt)
+      ansible.builtin.package:
+        name: "*"
+        state: latest
+        update_cache: true
+      when: package_facts.ansible_facts.package_mgr == "apt"
+
+    - name: Install updates using apt
       ansible.builtin.apt:
-        autoremove: yes
-      register: autoremove_result
+        upgrade: safe
+        autoremove: true
+        autoclean: true
+      when: package_facts.ansible_facts.package_mgr == "apt"
 
-    - name: Print errors if upgrade failed
-      ansible.builtin.debug:
-        msg: |
-          Upgrade Result: {{ upgrade_result }}
-          Reboot Result: {{ reboot_result }}
-          Autoremove Result: {{ autoremove_result }}
+    - name: Install updates using package manager (dnf)
+      ansible.builtin.package:
+        name: "*"
+        state: latest
+        update_cache: true
+      when: package_facts.ansible_facts.package_mgr == "dnf"
+
+    - name: Install updates using dnf
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+        update_cache: true
+      when: package_facts.ansible_facts.package_mgr == "dnf"
+
+    - name: Install updates using package manager (yum)
+      ansible.builtin.package:
+        name: "*"
+        state: latest
+        update_cache: true
+      when: package_facts.ansible_facts.package_mgr == "yum"
+
+    - name: Install updates using yum
+      ansible.builtin.yum:
+        name: "*"
+        state: latest
+        update_cache: true
+      when: package_facts.ansible_facts.package_mgr == "yum"
+
+    - name: Install updates using package manager (apk)
+      ansible.builtin.package:
+        name: "*"
+        state: latest
+        update_cache: true
+      when: package_facts.ansible_facts.package_mgr == "apk"
+
+    - name: Install updates using apk
+      ansible.builtin.apk:
+        name: "*"
+        state: latest
+        update_cache: true
+      when: package_facts.ansible_facts.package_mgr == "apk"
+
+  tags:
+    - linux_update

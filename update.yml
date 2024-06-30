@@ -1,6 +1,6 @@
 ---
 - name: Get hostname and IP address of Alpine hosts
-  hosts: vps
+  hosts: vps_servers
   gather_facts: yes
   tasks:
     - name: Display hostname and IP address

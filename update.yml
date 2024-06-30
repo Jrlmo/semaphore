@@ -1,100 +1,24 @@
 ---
-- name: Get hostname and IP address of Alpine hosts
-  hosts: vps_servers
-  gather_facts: yes
+- hosts: vps_servers
+  become: true
+  become_user: adm_ansible
   tasks:
-    - name: Display hostname and IP address
-      debug:
-        msg: "Hostname: {{ ansible_hostname }}, IP Address: {{ ansible_default_ipv4.address }}"
-    - name: Check for available Linux updates
-      block:
-    - name: Update package manager cache (apt)
-      ansible.builtin.apt:
-        update_cache: true
-      when: ansible_pkg_mgr == "apt"
+    - name: Update apt repo and cache on all Debian/Ubuntu boxes
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
 
-    - name: Update package manager cache (dnf)
-      ansible.builtin.dnf:
-        refresh: true
-      when: ansible_pkg_mgr == "dnf"
+    - name: Upgrade all packages on servers
+      apt: upgrade=dist force_apt_get=yes
 
-    - name: Update package manager cache (yum)
-      ansible.builtin.yum:
-        name: "*"
-        state: latest
-        update_cache: true
-      when: ansible_pkg_mgr == "yum"
+    - name: Check if a reboot is needed on all servers
+      register: reboot_required_file
+      stat: path=/var/run/reboot-required get_md5=no
 
-    - name: Update package manager cache (apk)
-      ansible.builtin.apk:
-        update_cache: true
-      when: ansible_pkg_mgr == "apk"
-
-    - name: Check for available updates
-      ansible.builtin.package_facts:
-        manager: auto
-      register: package_facts
-
-  tags:
-    - linux_update
-
-- name: Install Linux updates if available
-  block:
-    - name: Install updates using package manager (apt)
-      ansible.builtin.package:
-        name: "*"
-        state: latest
-        update_cache: true
-      when: package_facts.ansible_facts.package_mgr == "apt"
-
-    - name: Install updates using apt
-      ansible.builtin.apt:
-        upgrade: safe
-        autoremove: true
-        autoclean: true
-      when: package_facts.ansible_facts.package_mgr == "apt"
-
-    - name: Install updates using package manager (dnf)
-      ansible.builtin.package:
-        name: "*"
-        state: latest
-        update_cache: true
-      when: package_facts.ansible_facts.package_mgr == "dnf"
-
-    - name: Install updates using dnf
-      ansible.builtin.dnf:
-        name: "*"
-        state: latest
-        update_cache: true
-      when: package_facts.ansible_facts.package_mgr == "dnf"
-
-    - name: Install updates using package manager (yum)
-      ansible.builtin.package:
-        name: "*"
-        state: latest
-        update_cache: true
-      when: package_facts.ansible_facts.package_mgr == "yum"
-
-    - name: Install updates using yum
-      ansible.builtin.yum:
-        name: "*"
-        state: latest
-        update_cache: true
-      when: package_facts.ansible_facts.package_mgr == "yum"
-
-    - name: Install updates using package manager (apk)
-      ansible.builtin.package:
-        name: "*"
-        state: latest
-        update_cache: true
-      when: package_facts.ansible_facts.package_mgr == "apk"
-
-    - name: Install updates using apk
-      ansible.builtin.apk:
-        name: "*"
-        state: latest
-        update_cache: true
-      when: package_facts.ansible_facts.package_mgr == "apk"
-
-  tags:
-    - linux_update
+    - name: Reboot the box if kernel updated
+      reboot:
+        msg: "Reboot initiated by Ansible for kernel updates"
+        connect_timeout: 5
+        reboot_timeout: 300
+        pre_reboot_delay: 0
+        post_reboot_delay: 30
+        test_command: uptime
+      when: reboot_required_file.stat.exists

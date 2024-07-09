@@ -3,21 +3,22 @@
 # Example Usage:
 # [user@host ~$] ansible-playbook /etc/ansible/playbooks/webmin.yml --extra-vars 'target=nameFromHostsFile'
 #
-vars:
-  pkgs:
-    - perl
-    - libnet-ssleay-perl
-    - openssl
-    - libauthen-pam-perl
-    - libpam-runtime
-    - libio-pty-perl
-    - apt-show-versions
-    - python
+#vars:
+#  pkgs:
+#    - perl
+#    - libnet-ssleay-perl
+#    - openssl
+#    - libauthen-pam-perl
+#    - libpam-runtime
+#    - libio-pty-perl
+#    - apt-show-versions
+#    - python
 
 - hosts: '10.0.2.3'
   become: true
   become_user: root
   tasks:
-    - name: Install Webmin and prerequisites
-      apt: name={{ pkgs }} state=installed
+    - name : Install multiple packages
+      apt: name={{ item }} state=latest update_cache=true
+      loop: [git, wget, unzip, curl]
          

@@ -1,6 +1,5 @@
 ---
-- name: check for carbon black pkg
-  hosts: all
+- hosts: vps
   gather_facts: false
   tasks:
     - name: gather package facts

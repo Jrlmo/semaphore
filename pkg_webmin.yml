@@ -22,7 +22,9 @@
       apt: name={{ item }} state=latest update_cache=true
       loop: [git, wget, unzip, curl, perl, libnet-ssleay-perl, openssl, libauthen-pam-perl, libpam-runtime, libio-pty-perl, apt-show-versions, python3 ]
     
-    - name: Webmin Repositors Donwload
+    - name: Webmin Repositors Donwload/Setup
       command: echo y | 'curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh', 'sh setup-repos.sh'      
-    #- name: Webmin Repositors Setup
-    #  command: 'sh setup-repos.sh'
+    
+    - name: Webmin (Application Installing
+      command: echo y | apt install webmin
+        msg: "The install of Webmin is completed: http://IP:1000"

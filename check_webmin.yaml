@@ -1,1 +1,16 @@
-
+---
+- name: check for carbon black pkg
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: gather package facts
+      ansible.builtin.package_facts:
+      manager: auto
+    - name: convert ansible_facts.packages to list
+      ansible.builtin.set_fact:
+      pkgs_list: "{{ ansible_facts.packages | dict2items }}"
+    - name: create list of webmin black pkgs
+      ansible.builtin.set_fact:
+      webmin_pkgs: "{{ webmin_pkgs | default([]) + [item.key] }}"
+      loop: "{{ pkgs_list }}"
+      when: item.key is search('webmin') ## <-- Not sure of exact package name. Modify 'carbon' as needed

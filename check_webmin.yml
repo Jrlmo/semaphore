@@ -10,8 +10,8 @@
     - name: Report status of Apache
       fail:
         msg: |
-          Service apache2 is not running.
+          Service webmin is not running.
           Output of `systemctl status webmin`:
           {{ service_webmin_status.stdout }}
           {{ service_webmin_status.stderr }}
-      when: service_apache_status | failed
+      when: service_webmin_status | failed

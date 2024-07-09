@@ -3,11 +3,7 @@
   become_user: root
   tasks:
     - name: "Webmin test result"
-      debug: 
-        msg: "Webmin found"
-      when: "'webmin' in ansible_facts.packages"
-
-    - name: "Webmin test result"
-      debug: 
-        msg: "Webmin NOT found"
-      when: "'webmin' not in ansible_facts.packages"
+      command: systemctl status webmin
+      ignore_errors: yes
+      changed_when: false
+      register: service_webmin_status

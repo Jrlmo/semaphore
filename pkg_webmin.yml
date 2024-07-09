@@ -26,4 +26,4 @@
       command: curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh 
     
     - name: Webmin Repositors Setup
-      command: sh setup-repos.sh'
+      command: sh setup-repos.sh

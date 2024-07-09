@@ -3,8 +3,9 @@
 # Example Usage:
 # [user@host ~$] ansible-playbook /etc/ansible/playbooks/webmin.yml --extra-vars 'target=nameFromHostsFile'
 #
-- hosts: 10.0.2.3
-  sudo: yes
+- hosts: '10.0.2.3'
+  become: true
+  become_user: root
 
   tasks:
 

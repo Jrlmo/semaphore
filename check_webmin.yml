@@ -2,24 +2,9 @@
   become: true
   become_user: root
   tasks:
-    - name: Getting process IDs of the process
-      community.general.pids:
-        name: python
-      register: pids_of_python
+    - name: get service facts
+      ansible.builtin.service_facts:
 
-    - name: Printing the process IDs obtained
+    - name: try to work out how to access the service
       ansible.builtin.debug:
-        msg: "PIDS of python:{{pids_of_python.pids|join(',')}}"
-
-    - name: Getting process IDs of processes matching pattern
-      community.general.pids:
-        pattern: python(2(\.7)?|3(\.6)?)?\s+myapp\.py
-      register: myapp_pids    
-    #- name: Report status of Apache
-    #  fail:
-    #    msg: |
-    #      Service webmin is not running.
-    #      Output of `systemctl status webmin`:
-    #      {{ service_webmin_status.stdout }}
-    #      {{ service_webmin_status.stderr }}
-    #  when: service_webmin_status | failed
+        var: ansible_facts.services["oracle-tfa.service"]

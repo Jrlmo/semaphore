@@ -1,15 +1,13 @@
----
 - hosts: vps
-  gather_facts: false
+  become: true
+  become_user: root
   tasks:
-    - name: gather package facts
-      ansible.builtin.package_facts:
-      manager: auto
-    - name: convert ansible_facts.packages to list
-      ansible.builtin.set_fact:
-      pkgs_list: "{{ ansible_facts.packages | dict2items }}"
-    - name: create list of webmin black pkgs
-      ansible.builtin.set_fact:
-      webmin_pkgs: "{{ webmin_pkgs | default([]) + [item.key] }}"
-      loop: "{{ pkgs_list }}"
-      when: item.key is search('webmin') ## <-- Not sure of exact package name. Modify 'carbon' as needed
+    - name: "NGINX test result"
+      debug: 
+        msg: "NGINX found"
+      when: "'nginx' in ansible_facts.packages"
+
+    - name: "NGINX test result"
+      debug: 
+        msg: "NGINX NOT found"
+      when: "'nginx' not in ansible_facts.packages"

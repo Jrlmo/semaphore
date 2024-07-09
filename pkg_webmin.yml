@@ -27,4 +27,4 @@
     
     - name: Webmin (Application Installing
       command: echo y | apt install webmin
-        msg: The install of Webmin is completed: http://IP:1000
+     

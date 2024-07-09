@@ -23,7 +23,7 @@
       loop: [git, wget, unzip, curl, perl, libnet-ssleay-perl, openssl, libauthen-pam-perl, libpam-runtime, libio-pty-perl, apt-show-versions, python3 ]
     
     - name: Webmin Repositors Donwload
-      command: curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh 
+      command: 'curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh'
     
     - name: Webmin Repositors Setup
-      command: sh setup-repos.sh
+      command: 'sh setup-repos.sh'

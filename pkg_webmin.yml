@@ -26,5 +26,5 @@
       command: echo y | 'curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh', 'sh setup-repos.sh'      
     
     - name: Webmin (Application Installing
-      command: echo y | apt install webmin
+      command: apt install -y webmin
      

@@ -2,11 +2,19 @@
   become: true
   become_user: root
   tasks:
-    - name: "Webmin test result"
-      command: systemctl status webmin
-      ignore_errors: yes
-      changed_when: false
-      register: service_webmin_status
+    - name: Getting process IDs of the process
+      community.general.pids:
+        name: python
+      register: pids_of_python
+
+    - name: Printing the process IDs obtained
+      ansible.builtin.debug:
+        msg: "PIDS of python:{{pids_of_python.pids|join(',')}}"
+
+    - name: Getting process IDs of processes matching pattern
+      community.general.pids:
+        pattern: python(2(\.7)?|3(\.6)?)?\s+myapp\.py
+      register: myapp_pids    
     #- name: Report status of Apache
     #  fail:
     #    msg: |

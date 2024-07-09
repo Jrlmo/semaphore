@@ -11,7 +11,7 @@
      - name: Install Webmin and prerequisites
        apt: >
         update_cache=yes
-        pkg={{ item }}
+        #pkg={{ item }}
         state=installed
        with_items:
          - perl

@@ -8,19 +8,6 @@
   become_user: root
 
   tasks:
-
-     - name: Add Webmin repositories
-       apt_repository: >
-        repo='{{ item }}'
-        state=present
-       with_items:
-         - 'deb http://download.webmin.com/download/repository sarge contrib'
-         - 'deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib'
-
-     - name: Add Webmin key
-       apt_key: >
-        url='http://www.webmin.com/jcameron-key.asc'
-        state=present
      - name: Install Webmin and prerequisites
        apt: >
         update_cache=yes
@@ -35,4 +22,4 @@
          - libio-pty-perl
          - apt-show-versions
          - python
-         - webmin
+         

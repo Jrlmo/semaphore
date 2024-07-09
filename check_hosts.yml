@@ -1,1 +1,16 @@
 
+tasks:
+    - name: check if /etc/hosts exists
+      stat:
+        path: /etc/hosts
+      register: etchosts
+
+    - name: print
+      debug:
+        msg: "/etc/hosts exists"
+      when: etchosts.stat.exists
+
+    - name: print
+      debug:
+        msg: "/etc/hosts is directory"
+      when: etchosts.stat.isdir # this should be False

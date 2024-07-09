@@ -9,17 +9,16 @@
 
   tasks:
      - name: Install Webmin and prerequisites
-       apt: >
-        update_cache=yes
-        #pkg={{ item }}
-        state=installed
-       with_items:
-         - perl
-         - libnet-ssleay-perl
-         - openssl
-         - libauthen-pam-perl
-         - libpam-runtime
-         - libio-pty-perl
-         - apt-show-versions
-         - python
+       apt:
+         pkg: 
+           - perl
+           - libnet-ssleay-perl
+           - openssl
+           - libauthen-pam-perl
+           - libpam-runtime
+           - libio-pty-perl
+           - apt-show-versions
+           - python
+         status: latest
+         update_cache: true
          

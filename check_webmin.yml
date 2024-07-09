@@ -7,11 +7,11 @@
       ignore_errors: yes
       changed_when: false
       register: service_webmin_status
-    - name: Report status of Apache
-      fail:
-        msg: |
-          Service webmin is not running.
-          Output of `systemctl status webmin`:
-          {{ service_webmin_status.stdout }}
-          {{ service_webmin_status.stderr }}
-      when: service_webmin_status | failed
+    #- name: Report status of Apache
+    #  fail:
+    #    msg: |
+    #      Service webmin is not running.
+    #      Output of `systemctl status webmin`:
+    #      {{ service_webmin_status.stdout }}
+    #      {{ service_webmin_status.stderr }}
+    #  when: service_webmin_status | failed

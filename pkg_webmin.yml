@@ -20,6 +20,6 @@
           - libio-pty-perl
           - apt-show-versions
           - python
-        status: present
+        status: latest
         
          

@@ -12,7 +12,9 @@
   
   - name : Update all packages
     apt: name="*" state=latest update_cache=true force_apt_get=true
-    
+
+  - name: Runnung all packages updates
+    command: apt upgrade -y
 
 #    - name: Check if a reboot is needed on all servers
 #      register: reboot_required_file

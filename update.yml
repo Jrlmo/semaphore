@@ -1,5 +1,5 @@
 ---
-- hosts: vps
+- hosts: proxmox
   become: true
   become_user: root
   tasks:

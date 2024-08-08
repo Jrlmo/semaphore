@@ -24,11 +24,17 @@
         - {regexp: "^# ListenPort=10050$", replace: "ListenPort=10050"}
       vars:
         - zabbix_server: zabbix.lcl.jrlmo.us
-#- name: Start the Zabbix agent service
-#  service:
-#    name: zabbix-agent
-#    state: started
-#    enabled: yes
+    - name: Start the Zabbix agent service
+      service:
+        name: zabbix-agent
+        state: started
+        enabled: yes
+    - name: Allow port range 10050-10051
+      community.general.ufw:
+        rule: allow
+        port: 10050-10051
+        proto: tcp
+        
 #- name: Create a new host or update an existing host's info
 #  local_action:
 #    module: zabbix_host

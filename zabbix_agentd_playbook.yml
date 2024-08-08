@@ -1,13 +1,14 @@
 ---
-- hosts: test
-  become: true
-- name: Package installation text agent
-    apt:
-      name:
-        - zabbix-agent
-        #- httpd
-        #- mariadb-server
-      state: latest
+- name: Install Software Packages
+  hosts: test
+  become: yes
+  tasks:
+    - name: Install Software Package
+      apt:
+        name:
+          - zabbix-agent
+        state: present
+        update_cache: yes
 #- name: Install the Zabbix agent
 #  yum:
 #    name: http://repo.zabbix.com/zabbix/3.4/rhel/7/x86_64/zabbix-agent-3.4.8-1.el7.x86_64.rpm

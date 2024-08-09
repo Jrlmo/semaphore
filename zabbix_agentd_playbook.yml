@@ -1,6 +1,6 @@
 ---
 - name: Install Software Packages
-  hosts: proxmox
+  hosts: test
   become: yes
   tasks:
     - name: Install Software Package

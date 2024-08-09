@@ -24,7 +24,7 @@
         - {regexp: "^# ListenPort=10050$", replace: "ListenPort=10050"}
         - {regexp: "^# ListenIP=0.0.0.0$", replace: "ListenIP=0.0.0.0"}
       vars:
-        - zabbix_server: 0.0.0.0/0
+        - zabbix_server: zabbix.lcl.jrlmo.us
     - name: Start the Zabbix agent service
       service:
         name: zabbix-agent

@@ -1,5 +1,5 @@
 ---
-- hosts: '10.0.2.3'
+- hosts: test
   gather_facts: yes
   tasks:
       - name: gather os specific variables

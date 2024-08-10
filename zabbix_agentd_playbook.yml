@@ -1,6 +1,6 @@
 ---
 - name: Install Software Packages
-  hosts: test
+  hosts: 10.0.2.3
   become: yes
   tasks:
     - name: Install Software Package

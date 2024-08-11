@@ -1,5 +1,5 @@
 ---
-- hosts: test
+- hosts: vps
   gather_facts: yes
   tasks:
       - name: gather os specific variables

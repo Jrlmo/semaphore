@@ -1,6 +1,6 @@
 ---
 - name: Update Zabbix repo and Agent2
-  hosts: all
+  hosts: test
   become: yes
   become_method: sudo
   tasks:

@@ -60,10 +60,10 @@
       when: zabbix_config_file.stat.exists
 
     # Update Repo and new zabbix agent
-    - name: Update Zabbix agent
-      ansible.builtin.apt:
-        name: zabbix_agent2
-        update_cache: yes
+    #- name: Update Zabbix agent
+    #  ansible.builtin.apt:
+    #    name: zabbix_agent2
+    #    update_cache: yes
     
     - name: Configure the Zabbix agent
       replace:
@@ -80,7 +80,7 @@
         - zabbix_server: zabbix-server
     - name: Start the Zabbix agent service
       service:
-        name: zabbix_agent2
+        name: zabbix-agent2
         state: started
         enabled: yes
     - name: Allow everything and enable UFW

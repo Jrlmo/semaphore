@@ -58,4 +58,12 @@
       debug: 
         msg: "Zabbix Agent is installed !"
       when: zabbix_config_file.stat.exists
+      
+    - name: Install Software Package
+      apt:
+        name:
+          - zabbix-agent2
+        state: present
+        update_cache: yes
+    
 

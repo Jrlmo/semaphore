@@ -5,10 +5,10 @@
   become_method: sudo
   tasks:
     # Get distrib version for good repo
-    #- name: Distribution
-    #  debug: msg="{{ ansible_distribution }}"
-    #- name: Distribution version
-    #  debug: msg="{{ ansible_distribution_version}}"
+    - name: Distribution
+      debug: msg="{{ ansible_distribution }}"
+    - name: Distribution version
+      debug: msg="{{ ansible_distribution_version}}"
     - name: Distribution major version
       debug: msg="{{ ansible_distribution_major_version }}"
     - name: Show facts available on the system
@@ -29,8 +29,8 @@
       #ansible.builtin.apt:
       apt:
         deb: https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu22.04_all.deb
-      #  allow_downgrade: yes
-      @command: "wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu22.04_all.deb"
+        allow_downgrade: yes
+      #@command: "wget https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu22.04_all.deb"
       when: 
         - ansible_facts['distribution_major_version'] == "22"
 

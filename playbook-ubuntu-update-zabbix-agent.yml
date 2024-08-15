@@ -65,19 +65,19 @@
     #    name: zabbix_agent2
     #    update_cache: yes
     
-    - name: Configure the Zabbix agent
-      replace:
-        path: /etc/zabbix/zabbix_agent2.conf
-        regexp: '{{item.regexp}}'
-        replace: '{{item.replace}}'
-      with_items:
-        - {regexp: "^Server=127.0.0.1$", replace: "Server={{zabbix-server}}"}
-        - {regexp: "^ServerActive=127.0.0.1$", replace: "ServerActive={{zabbix-server}}"}
-        - {regexp: "^# Hostname=$", replace: "Hostname={{ansible_hostname}}"}
-        #- {regexp: "^# ListenPort=10050$", replace: "ListenPort=10050"}
-        - {regexp: "^# SourceIP=$", replace: "SourceIP={{ansible_hostname}}"}
-      vars:
-        - zabbix_server: zabbix-server
+    #- name: Configure the Zabbix agent
+    #  replace:
+    #    path: /etc/zabbix/zabbix_agent2.conf
+    #    regexp: '{{item.regexp}}'
+    #    replace: '{{item.replace}}'
+    #  with_items:
+    #    - {regexp: "^Server=127.0.0.1$", replace: "Server={{zabbix-server}}"}
+    #    - {regexp: "^ServerActive=127.0.0.1$", replace: "ServerActive={{zabbix-server}}"}
+    #    - {regexp: "^# Hostname=$", replace: "Hostname={{ansible_hostname}}"}
+    #    #- {regexp: "^# ListenPort=10050$", replace: "ListenPort=10050"}
+    #    - {regexp: "^# SourceIP=$", replace: "SourceIP={{ansible_hostname}}"}
+    #  vars:
+    #    - zabbix_server: zabbix-server
     - name: Start the Zabbix agent service
       service:
         name: zabbix-agent2

@@ -2,7 +2,7 @@
 - name: Update Zabbix repo and Agent2
   hosts: 10.0.2.2
   become: yes
-  become_method: root
+  #become_method: root
   tasks:
     # Get distrib version for good repo
     #- name: Distribution

@@ -64,6 +64,35 @@
       ansible.builtin.apt:
         name: zabbix-agent2
         update_cache: yes
+    
+    - name: Configure the Zabbix agent
+      replace:
+        path: /etc/zabbix/zabbix_agentd2.conf
+        regexp: '{{item.regexp}}'
+        replace: '{{item.replace}}'
+      with_items:
+        - {regexp: "^Server=127.0.0.1$", replace: "Server={{zabbix-server}}"}
+        - {regexp: "^ServerActive=127.0.0.1$", replace: "ServerActive={{zabbix-server}}"}
+        - {regexp: "^# Hostname=$", replace: "Hostname={{ansible_hostname}}"}
+        - {regexp: "^# ListenPort=10050$", replace: "ListenPort=10050"}
+        - {regexp: "^# SourceIP=$", replace: "={{ansible_hostname}}"}
+      vars:
+        - zabbix_server: zabbix.lcl.jrlmo.us
+    - name: Start the Zabbix agent service
+      service:
+        name: zabbix-agent
+        state: started
+        enabled: yes
+    - name: Allow everything and enable UFW
+      community.general.ufw:
+        state: enabled
+        policy: allow
+    - name: Allow port range 10050-10051
+      community.general.ufw:
+        rule: allow
+        port: 10050:10051
+        proto: tcp
+
 
 
 

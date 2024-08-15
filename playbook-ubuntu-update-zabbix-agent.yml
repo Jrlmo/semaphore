@@ -62,12 +62,12 @@
     # Update Repo and new zabbix agent
     - name: Update Zabbix agent
       ansible.builtin.apt:
-        name: zabbix-agent2
+        name: zabbix_agent2
         update_cache: yes
     
     - name: Configure the Zabbix agent
       replace:
-        path: /etc/zabbix/zabbix_agentd2.conf
+        path: /etc/zabbix/zabbix_agent2.conf
         regexp: '{{item.regexp}}'
         replace: '{{item.replace}}'
       with_items:
@@ -77,10 +77,10 @@
         - {regexp: "^# ListenPort=10050$", replace: "ListenPort=10050"}
         - {regexp: "^# SourceIP=$", replace: "={{ansible_hostname}}"}
       vars:
-        - zabbix_server: zabbix.lcl.jrlmo.us
+        - zabbix_server: zabbix-server
     - name: Start the Zabbix agent service
       service:
-        name: zabbix-agent
+        name: zabbix_agent2
         state: started
         enabled: yes
     - name: Allow everything and enable UFW

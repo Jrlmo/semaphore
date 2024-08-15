@@ -77,6 +77,13 @@
         - {regexp: "^Hostname=Zabbix server$", replace: "Hostname={{ansible_hostname}}"}
         - {regexp: "^# ListenPort=10050$", replace: "ListenPort=10050"}
         - {regexp: "^# ListenIP=0.0.0.0$", replace: "ListenIP=0.0.0.0"}
+        - {regexp: "^# SourceIP=$", replace: "SourceIP={{ansible_hostname}}"}
       vars:
         - zabbix_server: zabbix-server
+
+    - name: Start the Zabbix agent service
+      service:
+        name: zabbix-agent2
+        state: started
+        enabled: yes
 

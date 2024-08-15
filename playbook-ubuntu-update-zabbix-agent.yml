@@ -17,8 +17,7 @@
 
     # Ubuntu 24
     - name: Install last deb for update repo
-      #ansible.builtin.apt:
-      apt:
+      ansible.builtin.apt:
         deb: https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu24.04_all.deb
         allow_downgrade: yes
       when: 
@@ -26,17 +25,15 @@
 
     # Ubuntu 22
     - name: Install last deb for update repo
-      #ansible.builtin.apt:
-      apt:
+      ansible.builtin.apt:
         deb: https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu22.04_all.deb
         allow_downgrade: yes
-       when: 
+      when: 
         - ansible_facts['distribution_major_version'] == "22"
 
     # Ubuntu 20
     - name: Install last deb for update repo
-      #ansible.builtin.apt:
-      apt:
+      ansible.builtin.apt:
         deb: https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu20.04_all.deb
         allow_downgrade: yes
       when: 
@@ -44,8 +41,7 @@
 
     # Ubuntu 18
     - name: Install last deb for update repo
-      #ansible.builtin.apt:
-      apt:
+      ansible.builtin.apt:
         deb: https://repo.zabbix.com/zabbix/7.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_7.0-2+ubuntu18.04_all.deb
         allow_downgrade: yes
       when: 

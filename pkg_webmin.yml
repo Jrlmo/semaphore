@@ -34,7 +34,7 @@
     - name: install package
       become: true
       apt:
-        deb: webmin_2.202_all.deb
+        deb: /tmp/webmin_2.202_all.deb
       
     
     #- name: Run 

@@ -23,7 +23,7 @@
     
     - name: Run 
       ansible.builtin.shell:
-        cmd: curl https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh | sh -s -- -y 
+        cmd: wget https://sourceforge.net/projects/webadmin/files/webmin/2.202/webmin_2.202_all.deb/download && apt install --install-recommends ./webmin_2.202_all.deb
         
     #- name: Webmin Repositors Donwload/Setup
     #  command: 'curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh', 'sh setup-repos.sh'

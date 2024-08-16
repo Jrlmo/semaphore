@@ -13,8 +13,8 @@ h
 #    - libio-pty-perl
 #    - apt-show-versions
 #    - python
-
-- hosts: 10.0.2.3
+- name: Ndam
+  hosts: 10.0.2.3
   become: true
   become_user: root
   tasks:

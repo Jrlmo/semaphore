@@ -7,7 +7,7 @@
 # Example Usage:
 # [user@host ~$] ansible-playbook /etc/ansible/playbooks/webmin.yml --extra-vars 'target=nameFromHostsFile'
 #
-- hosts: '{{ target }}'
+- hosts: '{{ 10.0.2.3 }}'
   sudo: yes
 
   tasks:

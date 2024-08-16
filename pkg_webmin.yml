@@ -14,7 +14,7 @@ h
 #    - apt-show-versions
 #    - python
 
-- hosts: '10.0.2.3'
+- hosts: 10.0.2.3
   become: true
   become_user: root
   tasks:

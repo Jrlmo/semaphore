@@ -25,7 +25,19 @@
       ansible.builtin.get_url:
         url: https://sourceforge.net/projects/webadmin/files/webmin/2.202/webmin_2.202_all.deb/download
         dest: /tmp/
-        
+    
+    - name: fetch package
+      get_url:
+        url: https://sourceforge.net/projects/webadmin/files/webmin/2.202/webmin_2.202_all.deb/download
+        dest: /tmp/
+      when: deb_package_check.rc == 1
+
+    - name: install package
+      become: true
+      apt:
+        deb: webmin_2.202_all.deb
+      when: deb_package_check.rc == 1
+    
     #- name: Run 
     #  ansible.builtin.shell:
     #    cmd: wget https://sourceforge.net/projects/webadmin/files/webmin/2.202/webmin_2.202_all.deb/download && apt install --install-recommends ./webmin_2.202_all.deb

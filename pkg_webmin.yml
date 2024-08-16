@@ -13,10 +13,10 @@ h
 #    - libio-pty-perl
 #    - apt-show-versions
 #    - python
-- name: Ndam
-  hosts: '10.0.2.3'
-  become: true
-  become_user: root
+---
+- name: Update Zabbix repo and Agent2
+  hosts: 10.0.2.3
+  become: yes
   tasks:
     - name: Install multiple packages
       apt: name={{ item }} state=latest update_cache=true

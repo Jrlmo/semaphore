@@ -110,4 +110,15 @@
         name: zabbix-agent2
         state: started
         enabled: yes
+        
+    - name: Allow everything and enable UFW
+      community.general.ufw:
+        state: enabled
+        policy: allow
+    - name: Allow port range 10050-10051
+      community.general.ufw:
+        rule: allow
+        port: 10050:10051
+        proto: tcp
+
 

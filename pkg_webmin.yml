@@ -26,8 +26,8 @@ h
       ansible.builtin.shell:
         cmd: curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh | sh setup-repos.sh -- -y
         
-    - name: Webmin Repositors Donwload/Setup
-      command: 'curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh', 'sh setup-repos.sh'
+    #- name: Webmin Repositors Donwload/Setup
+    #  command: 'curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh', 'sh setup-repos.sh'
       
     - name: Webmin (Application Installing
       apt: name=webmin state=latest update_cache=true

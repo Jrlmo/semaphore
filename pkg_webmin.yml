@@ -23,7 +23,7 @@
     
     - name: Run 
       ansible.builtin.shell:
-        cmd: echo y | curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh, sh setup-repos.sh
+        cmd: (echo y "\n" )  | curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh sh setup-repos.sh
         
     #- name: Webmin Repositors Donwload/Setup
     #  command: 'curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh', 'sh setup-repos.sh'

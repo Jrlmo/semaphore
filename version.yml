@@ -12,6 +12,6 @@
     #  debug: msg="{{ ansible_distribution_version}}"
     - name: Distribution major version
       debug: msg="{{ ansible_distribution_major_version }}"
-    #- name: Show facts available on the system
-    #  ansible.builtin.debug:
-    #    var: ansible_facts
+    - name: Show facts available on the system
+      ansible.builtin.debug:
+        var: ansible_facts

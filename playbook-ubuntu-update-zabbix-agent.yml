@@ -53,7 +53,7 @@
         deb: https://repo.zabbix.com/zabbix/7.0/debian/pool/main/z/zabbix-release/zabbix-release_7.0-2+debian12_all.deb
         allow_downgrade: yes
       when: 
-        - ansible_facts['distribution_major_version'] == "18"
+        - ansible_facts['distribution_major_version'] == "12"
 
     # Debian 11
     - name: Install last deb for update repo
@@ -61,7 +61,7 @@
         deb: https://repo.zabbix.com/zabbix/7.0/debian/pool/main/z/zabbix-release/zabbix-release_7.0-2+debian11_all.deb
         allow_downgrade: yes
       when: 
-        - ansible_facts['distribution_major_version'] == "18"
+        - ansible_facts['distribution_major_version'] == "11"
 
     # Debian 10
     - name: Install last deb for update repo
@@ -69,7 +69,7 @@
         deb: https://repo.zabbix.com/zabbix/7.0/debian/pool/main/z/zabbix-release/zabbix-release_7.0-2+debian10_all.deb
         allow_downgrade: yes
       when: 
-        - ansible_facts['distribution_major_version'] == "18"
+        - ansible_facts['distribution_major_version'] == "10"
 
     # Check if Zabbix is present
     - name: Check if Zabbix is present

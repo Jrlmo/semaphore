@@ -1,6 +1,6 @@
 ---
 - name: Update Zabbix repo and Agent2
-  hosts: 192.168.1.103
+  hosts: proxmox
   become: yes
   #become_method: sudo
   tasks:

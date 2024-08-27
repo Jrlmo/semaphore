@@ -1,6 +1,5 @@
 ---
-- hosts: proxmox
-  become: true
+- hosts: vps
   become_user: root
   tasks:
 #    - name: Update apt repo and cache on all Debian/Ubuntu boxes

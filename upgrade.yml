@@ -1,8 +1,13 @@
-- name: Update all packages to their latest version
-  ansible.builtin.apt:
-    name: "*"
-    state: latest
+---
+- hosts: vps
+  become: true
+  become_user: root
+  tasks:
+    - name: Update all packages to their latest version
+      ansible.builtin.apt:
+      name: "*"
+        state: latest
 
-- name: Upgrade the OS (apt-get dist-upgrade)
-  ansible.builtin.apt:
-    upgrade: dist
+    - name: Upgrade the OS (apt-get dist-upgrade)
+      ansible.builtin.apt:
+        upgrade: dist

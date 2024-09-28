@@ -1,0 +1,13 @@
+
+---
+- name: Install Zabbix Agent using Chocolatey on Windows
+  hosts: windows
+  gather_facts: no
+  vars:
+    zabbix_server: 192.168.1.201
+  tasks:
+    - name: Install Zabbix Agent using Chocolatey
+      chocolatey.chocolatey.win_chocolatey:
+        name: zabbix-agent
+        state: present
+        params: "--params='SERVER=192.168.1.201'"

@@ -103,7 +103,7 @@
         - {regexp: "^# SourceIP=", replace: "SourceIP={{ansible_hostname}}"}
         #- {regexp: "^# SourceIP=$", replace: "SourceIP={{ansible_hostname}}"}
       vars:
-        - zabbix_server: 10.0.2.1
+        - zabbix_server: 192.168.1.201
 
     - name: Start the Zabbix agent service
       service:
